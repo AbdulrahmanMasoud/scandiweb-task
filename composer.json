@@ -1,0 +1,16 @@
+{
+    "name": "scandiweb/product",
+    "description": "Scandiweb Junior Developer test assignment!",
+    "autoload": {
+        "psr-4": {
+            "Scandiweb\\Product\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "AbdulrahmanMasoud",
+            "email": "abdulrahman.masoud.official@gmail.com"
+        }
+    ],
+    "require": {}
+}

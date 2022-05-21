@@ -1,6 +1,7 @@
 <?php
 require "./Routes/router.php";
 use Scandiweb\Product\Request\Request;
+use Scandiweb\Product\Response\Response;
 use Scandiweb\Product\Router\Route;
 
 class Application
@@ -17,6 +18,8 @@ class Application
     {
         Request::handle();
 
-        echo Route::handle();
+        $data = Route::handle();
+
+        Response::output($data);
     }
 }

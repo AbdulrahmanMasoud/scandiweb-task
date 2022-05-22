@@ -16,6 +16,27 @@ class DB
      * Database connection
      */
     protected static $connection;
+
+    /**
+     * Table
+     */
+    protected static $table;
+
+    /**
+     * Database query
+     */
+    protected static $query;
+
+    /**
+     * Database select
+     */
+    protected static $select;
+
+    /**
+     * Where query
+     */
+    protected static $where;
+
     /**
      * Database Config
      */
@@ -52,7 +73,7 @@ class DB
     /**
      * Get the instance of the class
      */
-    public static function instance()
+    private static function instance()
     {
         static::connect();
         if (! self::$instance) {
@@ -60,5 +81,70 @@ class DB
         }
 
         return self::$instance;
+    }
+
+    /**
+     * Define table
+     * @param string $table
+     * @return object $instance
+     */
+    public static function table($table)
+    {
+        static::$table = '`'.$table.'`';
+        return static::instance();
+    }
+
+    /**
+     * Select from database
+     * @return object $instance
+     */
+    public static function select()
+    {
+        $select = func_get_args();
+        $select = implode(',', $select);
+
+        static::$select = $select;
+        return static::instance();
+    }
+
+    /**
+     * Where query
+     * @param string $column
+     * @param string $operator
+     * @param string $value
+     * @return object $instance
+     */
+    public static function where($column, $operator, $value)
+    {
+        $where = '`'. $column .'`'. $operator . $value;
+
+        static::$where = $where;
+        return static::instance();
+    }
+
+    /**
+     * Database Query
+     */
+    public static function query($query = null)
+    {
+        static::instance();
+        if ($query == null) {
+            if (! static::$table) {
+                throw new Exception("Pleas select your table");
+            }
+            $query = "SELECT ";
+            $query .= static::$select ?: ' * ';
+            $query .= " FROM ".static::$table." ";
+            $query .= " WHERE ".static::$where ?: " ";
+        }
+        static::$query = $query;
+        return static::instance();
+    }
+
+    public static function getQuery()
+    {
+        static::query(static::$query);
+        $x= DB::$connection->query(static::$query, PDO::FETCH_ASSOC);
+        var_dump($x->fetch());
     }
 }

@@ -8,7 +8,7 @@ class ProductController
 {
     public function here($id)
     {
-        return DB::instance();
+        return DB::table('blogs')->where('id', '=', '1')->getQuery();
         return View::render("product", ['name'=>"Abdulrahman"]);
     }
 }

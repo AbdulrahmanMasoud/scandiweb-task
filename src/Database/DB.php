@@ -141,10 +141,60 @@ class DB
         return static::instance();
     }
 
-    public static function getQuery()
+
+    /**
+     * Execute
+     *
+     */
+    private static function execute($query)
     {
-        static::query(static::$query);
-        $x= DB::$connection->query(static::$query, PDO::FETCH_ASSOC);
-        var_dump($x->fetch());
+        // can use prepare->execute but i prefare query
+        static::query($query);
+        $data = DB::$connection->query(static::$query, PDO::FETCH_ASSOC);
+        static::clear();
+        return $data;
     }
+
+    /**
+     * get first recorde
+     * @return object $data
+     */
+    public static function first()
+    {
+        $data = static::execute(static::$query);
+        return $data->fetch();
+    }
+
+    /**
+     * get recordes
+     * @return object $data
+     */
+    public static function get()
+    {
+        $data = static::execute(static::$query);
+        return $data->fetchAll();
+    }
+
+    /**
+     * Clear the properities
+     *
+     * @return void
+     */
+    private static function clear()
+    {
+        static::$select = '';
+        static::$where = '';
+        static::$query = '';
+        static::$instance = '';
+    }
+
+
+
+
+    // public static function getQuery()
+    // {
+    //     static::query(static::$query);
+    //     $x= DB::$connection->query(static::$query, PDO::FETCH_ASSOC);
+    //     var_dump($x->fetch());
+    // }
 }

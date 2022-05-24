@@ -8,7 +8,10 @@ class ProductController
 {
     public function here($id)
     {
-        return DB::table('blogs')->where('id', '=', '1')->getQuery();
-        return View::render("product", ['name'=>"Abdulrahman"]);
+        $x= DB::table('blogs')->where('id', '>', '0')->first();
+        echo "<pre>";
+        var_dump($x);
+        echo "</pre>";
+        // return View::render("product", ['name'=>"Abdulrahman"]);
     }
 }

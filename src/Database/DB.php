@@ -122,6 +122,7 @@ class DB
         return static::instance();
     }
 
+
     /**
      * Database Query
      */
@@ -173,6 +174,39 @@ class DB
     {
         $data = static::execute(static::$query);
         return $data->fetchAll();
+    }
+
+    /**
+     * Insert to table
+     *
+     * @param array $data
+     *
+     * @return object
+     */
+    public static function create($data)
+    {
+        $table = static::$table;
+        $query = "INSERT INTO ". $table . ' ('.implode(',', array_keys($data)).') VALUES ('."'".implode("','", array_values($data))."'".')';
+        static::execute($query);
+        // $data = self::table($table)->where('id', '=', static::$connection->lastInsertId())->first();
+        return static::$connection->lastInsertId();
+    }
+
+    /**
+     * Delete from table
+     *
+     * @param string $key
+     * @param array $data
+     *
+     * @return bool
+     */
+    public static function delete($key = 'id', $data)
+    {
+        $table = static::$table;
+        $data = implode(",", array_values($data));
+        $query = "DELETE FROM ".$table." WHERE ".$key." IN ($data)";
+        static::execute($query);
+        return true;
     }
 
     /**

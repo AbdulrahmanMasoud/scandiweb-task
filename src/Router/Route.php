@@ -24,7 +24,7 @@ class Route
     public static function add($method, $uri, $callback)
     {
         $uri = trim($uri, '/');
-        $uri = $uri ?? '/';
+        $uri = $uri ?: '/';
 
         static::$routes[] = [
             'uri' => $uri,

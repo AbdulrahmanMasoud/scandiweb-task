@@ -2,4 +2,5 @@
 
 use Scandiweb\Product\Router\Route;
 
-Route::get('/home/{id}', "ProductController@here");
+Route::get('/', "ProductController@index");
+Route::get('/add-product', "ProductController@addProduct");

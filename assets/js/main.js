@@ -1,12 +1,12 @@
 
 function checkBox(product) {
-    let checkBoxes = $('.product #btn-check'+product);
+    let checkBoxes = $('.product #btn-check' + product);
     const deletedProducts = [];
     checkBoxes.attr("checked", !checkBoxes.attr("checked"))
-    $("#product"+product).toggleClass('product-borderd');
-    if($('#btn-check'+product).is(':checked')){
+    $("#product" + product).toggleClass('product-borderd');
+    if ($('#btn-check' + product).is(':checked')) {
         deletedProducts.push(product);
-    }else{
+    } else {
         // deletedProducts.splice(0, deletedProducts.length, product);
     }
     console.log(deletedProducts);
@@ -40,4 +40,41 @@ $('#productType').change(function () {
             furniture.addClass('d-none');
             break;
     }
+});
+
+//Add new product
+$('#add-product').on('click', function () {
+
+    let sku = $("#sku").val();
+    let name = $("#name").val();
+    let price = $("#price").val();
+    let size = $("#size").val();
+    let weight = $("#weight").val();
+    let height = $("#height").val();
+    let width = $("#width").val();
+    let length = $("#length").val();
+
+    $.ajax({
+        url: "/store-product",
+        method: "POST",
+        data: {
+            sku: sku,
+            name: name,
+            price: price,
+            size: size,
+            weight: weight,
+            height: height,
+            width: width,
+            length: length,
+        },
+        success: function (product) {
+            if(product){
+                window.location.replace("/");
+            }
+        },
+        error: function (err) {
+            console.log(err);
+        },
+    });
+
 });

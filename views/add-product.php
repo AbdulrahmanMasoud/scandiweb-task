@@ -17,19 +17,19 @@
                 <div class="form-content">
                     <div class="form-items">
                         <h3>Hey, Add Product Now</h3>
-                        <form id="product_form" method="POST" action="/store-product">
+                        <form id="product_form" method="POST" action="#">
                             <div class="col-md-12">
-                                <input class="form-control" type="text" name="sku" placeholder="SKU" required>
+                                <input class="form-control" type="text" name="sku" id="sku" placeholder="SKU" required>
                             </div>
 
                             <div class="col-md-12">
-                                <input class="form-control mt-3" type="text" name="name" placeholder="Product Name"
-                                    required>
+                                <input class="form-control mt-3" type="text" name="name" id="name"
+                                    placeholder="Product Name" required>
                             </div>
 
                             <div class="col-md-12">
-                                <input class="form-control mt-3" type="number" name="price" placeholder="Price ($)"
-                                    required>
+                                <input class="form-control mt-3" type="number" name="price" id="price"
+                                    placeholder="Price ($)" required>
                             </div>
 
                             <div class="col-md-12">
@@ -61,7 +61,7 @@
                             </div>
 
                             <div class="form-button mt-3">
-                                <button id="submit" type="submit" class="btn btn-primary">Register</button>
+                                <button id="add-product" type="button" class="btn btn-primary">Register</button>
                                 <a href="/" class="btn btn-danger">Cancel</a>
 
                             </div>

@@ -11,11 +11,6 @@
 </head>
 
 <body>
-
-<?php
-
-// var_dump($products);
-?>
     <nav class="navbar navbar-light bg-light">
         <a class="navbar-brand" href="#">Product</a>
         <ul class="actions justify-content-end my-0">
@@ -28,24 +23,23 @@
             <form method="post" class="container py-4" id="products_form" action="/mass-delete">
                 <input type="hidden" id="deleted-products" name="mass_delete">
                 <div class="row">
+                    <?php foreach ($products as $product): ?>
                     <div class="col-md-3 col-sm-6">
-                        <div class="product" id="product1" onclick="checkBox('1')">
-                            <input type="checkbox" class="btn-check" id="btn-check1" autocomplete="off" />
-                            <span class="sku font-weight-bold">SKU</span>
-                            <h5>Name</h5>
-                            <p>$1000</p>
-                            <p>Size: 100m</p>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="product" id="product2" onclick="checkBox('2')">
-                            <input type="checkbox" class="btn-check" id="btn-check2" autocomplete="off" />
-                            <span class="sku font-weight-bold">SKU</span>
-                            <h5 class="name">Name</h5>
-                            <p class="price">$1000</p>
+                        <div class="product"
+                            id="product<?php echo $product['id']; ?>"
+                            onclick="checkBox('<?php echo $product['id']; ?>')">
+                            <input type="checkbox" class="btn-check"
+                                id="btn-check<?php echo $product['id']; ?>"
+                                autocomplete="off" />
+                            <span class="sku font-weight-bold"><?php echo $product['sku']; ?></span>
+                            <h5 class="name"><?php echo $product['name']; ?>
+                            </h5>
+                            <p class="price">$<?php echo $product['price']; ?>
+                            </p>
                             <p class="type">Size: 100m</p>
                         </div>
                     </div>
+                    <?php endforeach; ?>
                 </div>
             </form>
         </div>

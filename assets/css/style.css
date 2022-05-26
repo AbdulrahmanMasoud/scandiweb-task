@@ -1,7 +1,7 @@
 html, body {
     height: 100%;
     background-color: #152733;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 .navbar{
@@ -17,7 +17,7 @@ html, body {
     text-align: center;
     height: 250px;
     padding: 30px 25px 25px;
-    margin: 0 auto;
+    margin: 5px auto;
     cursor: pointer;
     border-radius: 20px 20px;
     position: relative;

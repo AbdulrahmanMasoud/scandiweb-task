@@ -43,7 +43,7 @@ class DB
     protected static $config = [
         'host' => 'localhost',
         'port' => '3306',
-        'database' => 'blog',
+        'database' => 'products',
         'username' => 'masoud',
         'password' => 'password',
         'options' => [
@@ -187,7 +187,8 @@ class DB
     public static function create($data)
     {
         $table = static::$table;
-        $query = "INSERT INTO ". $table . ' ('.implode(',', array_keys($data)).') VALUES ('."'".implode("','", array_values($data))."'".')';
+        
+        $query = "INSERT INTO ". $table . ' ('.implode(',', array_keys(array_filter($data))).') VALUES ('."'".implode("','", array_values(array_filter($data)))."'".')';
         static::execute($query);
         // $data = self::table($table)->where('id', '=', static::$connection->lastInsertId())->first();
         return static::$connection->lastInsertId();

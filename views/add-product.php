@@ -16,20 +16,22 @@
             <div class="form-holder">
                 <div class="form-content">
                     <div class="form-items">
+                        <div id="alert"></div>
+
                         <h3>Hey, Add Product Now</h3>
                         <form id="product_form" method="POST" action="#">
                             <div class="col-md-12">
-                                <input class="form-control" type="text" name="sku" id="sku" placeholder="SKU" required>
+                                <input class="form-control" type="text" name="sku" id="sku" placeholder="SKU">
                             </div>
 
                             <div class="col-md-12">
                                 <input class="form-control mt-3" type="text" name="name" id="name"
-                                    placeholder="Product Name" required>
+                                    placeholder="Product Name">
                             </div>
 
                             <div class="col-md-12">
                                 <input class="form-control mt-3" type="number" name="price" id="price"
-                                    placeholder="Price ($)" required>
+                                    placeholder="Price ($)">
                             </div>
 
                             <div class="col-md-12">
@@ -45,10 +47,16 @@
                                 <div class="dvd d-none py-2" id="dvd-inputs">
                                     <input class="form-control" type="number" id="size" name="dvd"
                                         placeholder="Size (MB)">
+                                    <small class="my-2 text-secondary">
+                                        Please provide DVD size in mega bytes
+                                    </small>
                                 </div>
                                 <div class="book d-none py-2" id="book-inputs">
                                     <input class="form-control" type="number" id="weight" name="book"
                                         placeholder="Wight (KG)">
+                                    <small class="my-2 text-secondary">
+                                        Please provide book weight in kilo grams
+                                    </small>
                                 </div>
                                 <div class="furniture d-none py-2" id="furniture-inputs">
                                     <input class="form-control mt-1" type="number" id="height" name="dimension_h"
@@ -57,6 +65,10 @@
                                         placeholder="Dimension (W)">
                                     <input class="form-control mt-1" type="number" id="length" name="dimension_L"
                                         placeholder="Dimension (L)">
+
+                                    <small class="my-2 text-secondary">
+                                        Please provide dimensions in HxWxL format
+                                    </small>
                                 </div>
                             </div>
 

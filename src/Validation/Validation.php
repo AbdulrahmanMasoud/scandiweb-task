@@ -2,14 +2,22 @@
 
 namespace Scandiweb\Product\Validation;
 
+use Scandiweb\Product\Request\Request;
+
 class Validation
 {
+
     /**
-     * @param array $data
-     * @return bool
+     * @param string $key
+     * @param string $method
+     * @return void
      *
      */
-    public static function validator($data = [])
+    public static function required($key, $method = "POST")
     {
+        if (Request::has($method, $key)) {
+            return true;
+        }
+        return "Please, submit required data";
     }
 }

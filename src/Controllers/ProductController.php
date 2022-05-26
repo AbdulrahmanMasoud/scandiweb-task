@@ -4,6 +4,7 @@ namespace Scandiweb\Product\Controllers;
 use LDAP\Result;
 use Scandiweb\Product\Database\DB;
 use Scandiweb\Product\Request\Request;
+use Scandiweb\Product\Validation\Validation;
 use Scandiweb\Product\Views\View;
 
 class ProductController
@@ -21,6 +22,8 @@ class ProductController
 
     public function store()
     {
+        $validator =  $this->validator(['sku','name','price']);
+
         $product = DB::table('products')->create([
             'sku'           => str_replace(" ", "-", Request::post('sku')),
             'name'          => Request::post('name'),
@@ -31,12 +34,20 @@ class ProductController
             'width'         => Request::post('width') ?: null,
             'length'        => Request::post('length') ?: null,
         ]);
-        return $product ?: false;
+        return $product ?: ["error"=>$validator];
     }
 
     public function delete()
     {
         $deletedProducts = DB::table('products')->delete('id', Request::post('ids'));
         return $deletedProducts;
+    }
+
+    public function validator(array $keys)
+    {
+        foreach ($keys as $key) {
+            return Validation::required($key, 'POST');
+        }
+        return true;
     }
 }

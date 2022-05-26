@@ -61,7 +61,7 @@
                             </div>
 
                             <div class="form-button mt-3">
-                                <button id="add-product" type="button" class="btn btn-primary">Register</button>
+                                <button id="add-product" type="button" class="btn btn-primary">Save</button>
                                 <a href="/" class="btn btn-danger">Cancel</a>
 
                             </div>

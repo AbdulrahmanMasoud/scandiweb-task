@@ -1,6 +1,7 @@
 <?php
 namespace Scandiweb\Product\Controllers;
 
+use LDAP\Result;
 use Scandiweb\Product\Database\DB;
 use Scandiweb\Product\Request\Request;
 use Scandiweb\Product\Views\View;
@@ -24,12 +25,18 @@ class ProductController
             'sku'           => str_replace(" ", "-", Request::post('sku')),
             'name'          => Request::post('name'),
             'price'         => Request::post('price'),
-            'size'          =>  Request::post('dvd') ?: null,
-            'weight'        =>  Request::post('weight') ?: null,
+            'size'          => Request::post('size') ?: null,
+            'weight'        => Request::post('weight') ?: null,
             'height'        => Request::post('height') ?: null,
             'width'         => Request::post('width') ?: null,
             'length'        => Request::post('length') ?: null,
         ]);
         return $product ?: false;
+    }
+
+    public function delete()
+    {
+        $deletedProducts = DB::table('products')->delete('id', Request::post('ids'));
+        return $deletedProducts;
     }
 }

@@ -1,15 +1,8 @@
 
 function checkBox(product) {
     let checkBoxes = $('.product #btn-check' + product);
-    const deletedProducts = [];
     checkBoxes.attr("checked", !checkBoxes.attr("checked"))
     $("#product" + product).toggleClass('product-borderd');
-    if ($('#btn-check' + product).is(':checked')) {
-        deletedProducts.push(product);
-    } else {
-        // deletedProducts.splice(0, deletedProducts.length, product);
-    }
-    console.log(deletedProducts);
 }
 
 // Determine special attribute according to type switcher
@@ -68,7 +61,7 @@ $('#add-product').on('click', function () {
             length: length,
         },
         success: function (product) {
-            if(product){
+            if (product) {
                 window.location.replace("/");
             }
         },
@@ -77,4 +70,10 @@ $('#add-product').on('click', function () {
         },
     });
 
+});
+
+//Mass Delete
+
+$("#delete-product-btn").on('click', function () {
+    $('#products_form').submit();
 });

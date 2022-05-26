@@ -3,4 +3,5 @@
 use Scandiweb\Product\Router\Route;
 
 Route::get('/', "ProductController@index");
-Route::get('/add-product', "ProductController@addProduct");
+Route::get('/add-product', "ProductController@create");
+Route::post('/store-product', "ProductController@store");

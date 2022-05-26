@@ -11,6 +11,11 @@
 </head>
 
 <body>
+
+<?php
+
+// var_dump($products);
+?>
     <nav class="navbar navbar-light bg-light">
         <a class="navbar-brand" href="#">Product</a>
         <ul class="actions justify-content-end my-0">

@@ -17,7 +17,7 @@
                 <div class="form-content">
                     <div class="form-items">
                         <h3>Hey, Add Product Now</h3>
-                        <form id="product_form">
+                        <form id="product_form" method="POST" action="/store-product">
                             <div class="col-md-12">
                                 <input class="form-control" type="text" name="sku" placeholder="SKU" required>
                             </div>

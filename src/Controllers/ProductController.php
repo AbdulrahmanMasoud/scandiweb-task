@@ -2,25 +2,27 @@
 namespace Scandiweb\Product\Controllers;
 
 use Scandiweb\Product\Database\DB;
+use Scandiweb\Product\Models\Product;
+use Scandiweb\Product\Request\Request;
 use Scandiweb\Product\Views\View;
 
 class ProductController
 {
     public function index()
     {
-        $x= DB::table('blogs')->where('id', '>', '0')->first();
-        // $x = DB::table('blogs')->create([
-        //     'title'=>'hello title',
-        //     'content'=>'hello content',
-        // ]);
-
-        // $x=DB::table('blogs')->delete('id', [20,21]);
-       
-        return View::render("product", ['x'=>$x]);
+        $products = DB::table('blogs')->get();
+        return View::render("product", ['products'=>$products]);
     }
 
-    public function addProduct()
+    public function create()
     {
         return View::render("add-product");
+    }
+
+    public function store()
+    {
+        echo "<pre>";
+        var_dump(Request::all());
+        echo "</pre>";
     }
 }

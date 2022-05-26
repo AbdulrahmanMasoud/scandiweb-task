@@ -117,7 +117,7 @@ class DB
     public static function where($column, $operator, $value)
     {
         $where = '`'. $column .'`'. $operator . $value;
-
+        
         static::$where = $where;
         return static::instance();
     }
@@ -136,7 +136,7 @@ class DB
             $query = "SELECT ";
             $query .= static::$select ?: ' * ';
             $query .= " FROM ".static::$table." ";
-            $query .= " WHERE ".static::$where ?: " ";
+            $query .= static::$where ? " WHERE ".static::$where : " ";
         }
         static::$query = $query;
         return static::instance();
@@ -153,6 +153,7 @@ class DB
         static::query($query);
         $data = DB::$connection->query(static::$query, PDO::FETCH_ASSOC);
         static::clear();
+
         return $data;
     }
 

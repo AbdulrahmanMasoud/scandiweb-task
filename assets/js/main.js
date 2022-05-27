@@ -62,9 +62,9 @@ $('#add-product').on('click', function () {
         },
         success: function (product) {
             if (product > 0 && JSON.parse(product).error == undefined) {
-                window.location.replace("/");
-            }else{
-                $('#alert').html('<div class="alert alert-danger" role="alert">'+JSON.parse(product).error+'</div>');
+                // window.location.replace("/");
+            } else {
+                $('#alert').html('<div class="alert alert-danger" role="alert">' + JSON.parse(product).error + '</div>');
                 console.log(JSON.parse(product).error);
             }
         },

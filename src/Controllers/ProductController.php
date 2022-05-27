@@ -1,7 +1,6 @@
 <?php
 namespace Scandiweb\Product\Controllers;
 
-use LDAP\Result;
 use Scandiweb\Product\Database\DB;
 use Scandiweb\Product\Request\Request;
 use Scandiweb\Product\Validation\Validation;
@@ -22,7 +21,7 @@ class ProductController
 
     public function store()
     {
-        $validator =  $this->validator(['sku','name','price']);
+        $validator =  Validation::validator(['sku','name','price']);
 
         $product = DB::table('products')->create([
             'sku'           => str_replace(" ", "-", Request::post('sku')),
@@ -40,14 +39,18 @@ class ProductController
     public function delete()
     {
         $deletedProducts = DB::table('products')->delete('id', Request::post('ids'));
-        return $deletedProducts;
+        header("Location: /");
+        die();
     }
 
-    public function validator(array $keys)
+    public function typeValidator()
     {
-        foreach ($keys as $key) {
-            return Validation::required($key, 'POST');
+        if (
+            !empty(Request::post('size')) || !empty(Request::post('weight')) ||
+            (!empty(Request::post('height')) && !empty(Request::post('width')) && !empty(Request::post('length')))
+        ) {
+            return true;
         }
-        return true;
+        return "Please, provide the data of indicated type";
     }
 }

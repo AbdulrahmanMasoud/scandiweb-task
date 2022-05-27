@@ -15,9 +15,20 @@ class Validation
      */
     public static function required($key, $method = "POST")
     {
-        if (Request::has($method, $key)) {
-            return true;
+        if (!Request::has($method, $key)) {
+            return "Please, submit required data";
         }
-        return "Please, submit required data";
+    }
+
+    /**
+     * @param array $keys
+     * @return void
+     *
+     */
+    public static function validator(array $keys)
+    {
+        foreach ($keys as $key) {
+            return self::required($key, 'POST');
+        }
     }
 }

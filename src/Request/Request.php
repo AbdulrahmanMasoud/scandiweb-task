@@ -127,7 +127,8 @@ class Request
      */
     public static function has($type, $key)
     {
-        return array_key_exists($key, $type);
+        // array_filter(Request::all())
+        return array_key_exists($key, static::all());
     }
 
     /**

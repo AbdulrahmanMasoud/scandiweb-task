@@ -9,15 +9,15 @@ class Validation
 
     /**
      * @param string $key
-     * @param string $method
      * @return void
      *
      */
-    public static function required($key, $method = "POST")
+    public static function required($key, $method="POST")
     {
-        if (!Request::has(Request::all(), $key)) {
-            return "Please, submit required data";
+        if (Request::has($method, $key)) {
+            return true;
         }
+        return "Please, submit required data";
     }
 
     /**
@@ -28,7 +28,10 @@ class Validation
     public static function validator(array $keys)
     {
         foreach ($keys as $key) {
-            return self::required($key, 'POST');
+            if (empty(Request::post($key))) {
+                return "Please, submit required data";
+                break;
+            }
         }
     }
 }

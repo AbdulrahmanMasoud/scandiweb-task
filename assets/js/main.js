@@ -47,6 +47,7 @@ $('#add-product').on('click', function () {
     let width = $("#width").val();
     let length = $("#length").val();
 
+
     $.ajax({
         url: "/store-product",
         method: "POST",
@@ -61,11 +62,10 @@ $('#add-product').on('click', function () {
             length: length,
         },
         success: function (product) {
-            if (product > 0 && JSON.parse(product).error == undefined) {
-                 window.location.replace("/");
-            } else {
-                $('#alert').html('<div class="alert alert-danger" role="alert">' + JSON.parse(product).error + '</div>');
-                console.log(JSON.parse(product).error);
+            if(!JSON.parse(product).status){
+                $('#alert').html('<div class="alert alert-danger" role="alert">' + JSON.parse(product).message + '</div>');
+            }else if(JSON.parse(product).status && JSON.parse(product).message){
+                window.location.replace("/");
             }
         },
         error: function (err) {

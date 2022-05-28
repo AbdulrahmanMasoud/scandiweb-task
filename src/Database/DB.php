@@ -204,6 +204,9 @@ class DB
      */
     public static function delete($key = 'id', $data)
     {
+        if (empty($data)) {
+            return false;
+        }
         $table = static::$table;
         $data = implode(",", array_values($data));
         $query = "DELETE FROM ".$table." WHERE ".$key." IN ($data)";
@@ -223,14 +226,4 @@ class DB
         static::$query = '';
         static::$instance = '';
     }
-
-
-
-
-    // public static function getQuery()
-    // {
-    //     static::query(static::$query);
-    //     $x= DB::$connection->query(static::$query, PDO::FETCH_ASSOC);
-    //     var_dump($x->fetch());
-    // }
 }

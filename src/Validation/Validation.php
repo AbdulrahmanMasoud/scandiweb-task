@@ -15,7 +15,7 @@ class Validation
      */
     public static function required($key, $method = "POST")
     {
-        if (!Request::has($method, $key)) {
+        if (!Request::has(Request::all(), $key)) {
             return "Please, submit required data";
         }
     }

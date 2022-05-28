@@ -14,7 +14,7 @@
     <nav class="navbar navbar-light bg-light">
         <a class="navbar-brand" href="#">Product</a>
         <ul class="actions justify-content-end my-0">
-            <a href="/add-product" class="btn btn-success">ADD</a>
+            <button onclick="window.location.replace('/add-product');" class="btn btn-success">ADD</button>
             <button id="delete-product-btn" class="btn btn-danger">MASS DELETE</button>
         </ul>
     </nav>

@@ -39,8 +39,11 @@ class ProductController
     public function delete()
     {
         $deletedProducts = DB::table('products')->delete('id', Request::post('ids'));
-        header("Location: /");
-        die();
+        if ($deletedProducts) {
+            header("Location: /");
+            die();
+        }
+        return "Pleas Select one item to delete";
     }
 
     public function typeValidator()

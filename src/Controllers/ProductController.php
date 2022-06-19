@@ -21,11 +21,9 @@ class ProductController
 
     public function store()
     {
-        $validator =  Validation::validator(['sku','name','price']);
+        $validator =  Validation::validator(['sku','name','price'], ['size','weight','height','width','length']);
         if ($validator != null) {
             return ["status"=>false,"message"=>$validator];
-        } elseif ($this->typeValidator() != null) {
-            return ["status"=>false,"message"=>$this->typeValidator()];
         }
         $product = DB::table('products')->create([
             'sku'           => str_replace(" ", "-", Request::post('sku')),
@@ -50,14 +48,4 @@ class ProductController
         return "Pleas Select one item to delete";
     }
 
-    public function typeValidator()
-    {
-        if (
-            !empty(Request::post('size')) || !empty(Request::post('weight')) ||
-            (!empty(Request::post('height')) && !empty(Request::post('width')) && !empty(Request::post('length')))
-        ) {
-            return null;
-        }
-        return "Please, provide the data of indicated type";
-    }
 }

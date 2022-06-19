@@ -19,13 +19,13 @@ class Validation
         }
         return "Please, submit required data";
     }
-
+    
     /**
      * @param array $keys
      * @return void
      *
      */
-    public static function validator(array $keys)
+    public static function validator(array $keys, array $requiredOne)
     {
         foreach ($keys as $key) {
             if (empty(Request::post($key))) {
@@ -33,5 +33,16 @@ class Validation
                 break;
             }
         }
+        // one of them is required
+        $msg = "";
+        foreach ($requiredOne as $key) {
+            if (!in_array($key, array_keys(array_filter(Request::all())))) {
+                $msg = "Please, provide the data of indicated type";
+                continue;
+            } else {
+                return null;
+            }
+        }
+        return $msg;
     }
 }
